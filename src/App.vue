@@ -1,7 +1,14 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <!-- 头部 -->
+    <Row class="head" type="flex">
+      <Col span="15">
+        <router-link to='/admintor' tag="button">管理员登录</router-link>
+      </Col>
+    </Row>
+    <!-- 简介 -->
+    <Row type="flex" class="jianjie">
+      <router-view></router-view>
   </div>
 </template>
 
@@ -12,12 +19,20 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.app{
+  background-color: whitesmoke;
+
 }
+.head{
+  justify-content: center;
+  background-color: white;
+  font-size: 15px;
+  padding: 8px 0px;
+  
+}
+.jianjie{
+  background-color: white;
+  font-size: 15px;
+}
+
 </style>
