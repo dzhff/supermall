@@ -76,7 +76,7 @@ export default {
               console.log(g);
             })
             // 全局定义的
-            // this.$axios.get("")
+            // this.$axios.get("")'
             // if(this.formInline.user != 'admin' || this.formInline.password != 'admin'){
 
             // }
