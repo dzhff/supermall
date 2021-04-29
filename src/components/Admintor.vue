@@ -17,7 +17,7 @@
 
   <Card class="adminform">
     <img class="adminimg" src="../../src/assets/image/logo.png" >
-   <Form :model="formInline" :rules="ruleInline" inline>
+   <Form :model="formInline" :rules="ruleInline" inline ref="houtAdmin">
         <FormItem prop="user">
             <Input type="text" v-model="formInline.user" placeholder="username">
               <Icon type="ios-person-outline" slot="prepend"></Icon>
@@ -56,33 +56,70 @@ export default {
           password:[
             {required:true,message:'Please fill in the password.', trigger: 'blur'},
             { type: 'string', min: 5, message: 'The password length cannot be less than 6 bits', trigger: 'blur'}
-          ]
+          ],
+
         }
         }
       },
       methods:{
         formSubmit(){
-          if(this.formInline.user !==''&&this.formInline.password !==''){
-            // console.log(this.formInline);
+          this.$refs.houtAdmin.validate((valid)=>{
+            if(!valid)return
+            
             axios({
               method:'post',
-              url:'/user/adminLogin?password='+this.formInline.password+'&username='+this.formInline.user,
+              url:'/user/adminLogin',
+              params:{
+                 password:this.formInline.password,
+                 username:this.formInline.user
+              }
               // headers: "content-type: 'application/json'"
-            }) .then((g)=>{
+            }).then((g)=>{
+              console.log(g);
+              if(g.data.state !==true){
+                this.$message.error('登陆失败')
+              }else{
+                this.$message.success('登录成功')
+              }
+              window.localStorage.setItem('admintorToken',g.data.token)
+              this.$router.push('/hout_admin')
+
+            })
+          })
+          
+            // axios({
+            //   method:'post',
+            //   url:'/user/adminLogin?password='+this.formInline.password+'&username='+this.formInline.user,
+            //   // headers: "content-type: 'application/json'"
+            // })
+
+           
+            // axios.post('/user/adminLogin',this.formInline
+            // )
+             .then((g)=>{
               // 这里要写一个验证
               // if(g.data.state = true)
               console.log(g)
             }).catch((g)=>{
               console.log(g);
             })
+            // alert("你已成功进入管理员界面")
+            this.formInline.user=""
+            this.formInline.password=""
+
+            // beforeRouteEnter(to, from, next){
+            //   if(to.formInline.user=='admin'&&to.formInline.password=='admin'){
+            //     console.log(to.formInline.user)
+            //     console.log(to.formInline.password)
+            //   }
+            // }
             // 全局定义的
             // this.$axios.get("")'
             // if(this.formInline.user != 'admin' || this.formInline.password != 'admin'){
 
             // }
-          }else {
-            alert("请填写你的账户和密码")
-          }
+          
+          
         }
       }
       

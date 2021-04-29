@@ -8,6 +8,8 @@ import 'normalize.css/normalize.css'
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import axios from 'axios';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 // import 'assets/js/bootstrap.js'
 // import 'assets/css/bootstrap.css'
 
@@ -20,6 +22,9 @@ axios.defaults.baseURL="http://121.4.187.232:8080"
 Vue.config.productionTip = false
 Vue.use(ViewUI);
 Vue.use(Router);
+Vue.use(ElementUI);
+
+
 
 
 
