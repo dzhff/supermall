@@ -11,7 +11,7 @@
                 <span>
                     <h3>{{$route.query.contentshow}}</h3>
                 </span> -->
-                <el-card class="box-card" v-for="item in tiaoItem[0]" :key="item.id">
+                <el-card class="box-card" v-for="item in tiaoItem" :key="item.id">
                     <div slot="header" class="showSpan1">
                         <span class="span_title">{{item.title}}</span>
                         <span class="span_time">{{item.time}}</span>
@@ -21,6 +21,7 @@
                     <!-- </div> -->
                     <div>
                         <h3>{{item.content}}</h3>
+                        <span class='avatar'><img src="avatar" alt="图片加载失败"></span>
                     </div>
                 </el-card>
                 <br>
@@ -50,7 +51,8 @@ export default {
         return{
             id:this.$route.query.id,
             tiaoItem:[],
-            commentItem:[]
+            commentItem:[],
+            avatar:
         }
     },
     created:
@@ -61,9 +63,9 @@ export default {
         axios.get('http://121.4.187.232:8080/passage/passageResources?passageID='+this.id)
         .then((g)=>{
             this.tiaoItem.push(g.data[0])
-                        // console.log()
-            // this.tiaoItem=g.data
             console.log(this.tiaoItem);
+            this.avatar=g.data[2]
+            console.log(g.data[2]);
         })
     }
 }
