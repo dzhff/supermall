@@ -21,7 +21,7 @@
                     <!-- </div> -->
                     <div>
                         <h3>{{item.content}}</h3>
-                        <span class='avatar'><img src="avatar" alt="图片加载失败"></span>
+                        <!-- <span class='avatar'><img src="avatar" alt="图片加载失败"></span> -->
                     </div>
                 </el-card>
                 <br>
@@ -30,11 +30,13 @@
         </el-col>
         <el-col :span="13" :offset="5">
             <div class="showdiv" >
-                <!-- <div> -->
-                    <!-- <span>{{$route.query.commentId}}</span>
-                    <span>{{$route.query.contentt}}</span>
-                    <span>{{$route.query.commentTime}}</span>
-                </div> -->
+                <el-card v-for="item in commentItem" :key="item.id">
+                <div >
+                    <span>游客{{item.commentID}}</span>
+                    <span>{{item.content}}</span>
+                    <span>{{item.time}}</span>
+                </div>
+                </el-card>
             </div>
         </el-col>
       </el-row> 
@@ -49,23 +51,32 @@ export default {
     name:'Show',
     data(){
         return{
-            id:this.$route.query.id,
+            id:this.$route.query.idd,
             tiaoItem:[],
             commentItem:[],
-            avatar:
+            // avatar:
         }
     },
     created:
     function(){
-        this.id=this.$route.query.idd
+        this.id=this.$route.query.idd;
         console.log(this.$route.query.idd);
         // console.log(this.$route.query.contentshow);
         axios.get('http://121.4.187.232:8080/passage/passageResources?passageID='+this.id)
         .then((g)=>{
             this.tiaoItem.push(g.data[0])
             console.log(this.tiaoItem);
-            this.avatar=g.data[2]
-            console.log(g.data[2]);
+            // this.avatar=g.data[2]
+            // this.commentItem.push(g.data[3])
+            // console.log(this.commentItem);
+        })
+        this.id=this.$route.query.idd;
+        axios.get('http://121.4.187.232:8080/passage/queryCommentByPassageID?passageID='+this.id)
+        .then((g)=>{
+            this.commentItem.push(g.data[3])
+            // console.log(this.commentItem);
+            console.log(g);
+
         })
     }
 }
