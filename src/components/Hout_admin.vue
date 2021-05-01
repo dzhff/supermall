@@ -45,7 +45,7 @@ export default {
     methods:{
         loginout(){
             window.localStorage.removeItem('admintorToken')
-            this.$router.push('/user_login')
+            this.$router.push('/shouye')
         }
     }
 }

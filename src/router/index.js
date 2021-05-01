@@ -19,9 +19,7 @@ const Admintor  =()=>import('../components/Admintor')
 const Bored  =()=>import('../components/Bored')
 const Shouye  =()=>import('../components/Shouye')
 const Source  =()=>import('../components/Source')
-
-
-
+const Show  =()=>import('../components/Show')
 
 Vue.use(Router)
 
@@ -32,19 +30,38 @@ const routes = [
   },
   {
     path:'/shouye',
-    component:Shouye,
+    components:{
+      default:Shouye,
+      first:Shouye
+    }
   },
   {
     path:'/bored',
-    component:Bored,
+    components:{
+      default:Bored,
+      first:Bored
+    },
   },
   {
     path:'/source',
-    component:Source
+    components:{
+      default:Source,
+      first:Source
+    }
+  },
+  {
+    path:'/show',
+    components:{
+      default:Show,
+      first:Show
+    }
   },
   {
     path:'/admin',
-    component:Admin,
+    components:{
+      default:Admin,
+      scend:Admin
+    },
     children:[
       {
         path:'',
@@ -53,21 +70,33 @@ const routes = [
       },
       { 
         path:'user_login',
-        component:User_login
+        components:{
+          default:User_login,
+          scend:User_login
+        }
       },
       {
         path:'user_registration',
-        component:User_registration
+        components:{
+          default:User_registration,
+          scend:User_registration
+        }
       },
       {
         path:'admintor',
-        component:Admintor
+        components:{
+          default:Admintor,
+          scend:Admintor
+        }
       }
     ]
   },
   {
     path:'/hout_admin',
-    component:Hout_admin
+    components:{
+      default:Hout_admin,
+      scend:Hout_admin
+    }
   }
 ]
 //   {

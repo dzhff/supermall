@@ -1,0 +1,91 @@
+<template>
+<div>
+    <el-row :gutter="20" class="show_main">
+        <el-col :span="13" :offset="5">
+            <h1>展示资源</h1>
+            <div  >
+                <!-- <span class="showSpan1">
+                    <h1>{{$route.query.titleshow}}</h1>
+                    <h3>{{$route.query.timeshow}}</h3>
+                </span>
+                <span>
+                    <h3>{{$route.query.contentshow}}</h3>
+                </span> -->
+                <el-card class="box-card" v-for="item in tiaoItem[0]" :key="item.id">
+                    <div slot="header" class="showSpan1">
+                        <span class="span_title">{{item.title}}</span>
+                        <span class="span_time">{{item.time}}</span>
+                    </div>
+                    <!-- <div v-for="o in 4" :key="o" class="text item"> -->
+                        <!-- {{'列表内容 ' + o }} -->
+                    <!-- </div> -->
+                    <div>
+                        <h3>{{item.content}}</h3>
+                    </div>
+                </el-card>
+                <br>
+                <br>
+            </div>
+        </el-col>
+        <el-col :span="13" :offset="5">
+            <div class="showdiv" >
+                <!-- <div> -->
+                    <!-- <span>{{$route.query.commentId}}</span>
+                    <span>{{$route.query.contentt}}</span>
+                    <span>{{$route.query.commentTime}}</span>
+                </div> -->
+            </div>
+        </el-col>
+      </el-row> 
+</div>
+  
+
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+    name:'Show',
+    data(){
+        return{
+            id:this.$route.query.id,
+            tiaoItem:[],
+            commentItem:[]
+        }
+    },
+    created:
+    function(){
+        this.id=this.$route.query.idd
+        console.log(this.$route.query.idd);
+        // console.log(this.$route.query.contentshow);
+        axios.get('http://121.4.187.232:8080/passage/passageResources?passageID='+this.id)
+        .then((g)=>{
+            this.tiaoItem.push(g.data[0])
+                        // console.log()
+            // this.tiaoItem=g.data
+            console.log(this.tiaoItem);
+        })
+    }
+}
+</script>
+
+<style>
+.showdiv{
+     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+     border-radius: 4px
+}
+.showSpan1{
+    display: flex;
+    justify-content: space-between;
+}
+.showSpan2{
+    display: flex;
+    /* justify-content */
+}
+.span_title{
+    font-size: 30px;
+}
+.span_time{
+    font-size: 20px;
+}
+</style>

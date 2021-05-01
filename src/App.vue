@@ -1,11 +1,15 @@
 <template>
   <div id="app">
+    <router-view name="scend"></router-view>
     <!-- <router-view></router-view> -->
     <!-- <router-link to='/admin' tag="button"> 登录</router-link>
     <router-link to='/hout_admin' tag="button" @click="guan">管理员界面</router-link> -->
     <!-- <router-link to='/main' tag="button">主页面</router-link> -->
     <el-container>
     <el-header class="home_head">
+      <!-- <span class="notice">
+          <el-button plain @click="notice_btn" v-show="gonggao">不会自动关闭</el-button>
+      </span> -->
       <el-row :gutter="20">
         <el-col :span="18" :offset="4">
         <div>
@@ -36,24 +40,30 @@
                 <router-link to='/shouye'><el-menu-item >首页</el-menu-item></router-link>
                 <router-link to="/bored"><el-menu-item >大厅留言板</el-menu-item></router-link>
                 <router-link to='/source'><el-menu-item>资源文章页</el-menu-item></router-link>
+                <router-link to='/show' v-show="cang"><el-menu-item>资源展示</el-menu-item></router-link>
                 <br>
                 <br>
-                <router-link to='/admin'><el-button class="denglu_btn"> 登录</el-button></router-link>
-                <router-link to='/hout_admin'><el-button @click="guan">管理员界面</el-button></router-link>
+                <!-- <router-link to='/admin'><el-button class="denglu_btn"> 登录</el-button></router-link> -->
+                <!-- <router-link to='/hout_admin'><el-button @click="guan">管理员界面</el-button></router-link> -->
+                <el-button @click="userClick">登录</el-button>
+                <el-button @click="guanClick" >管理员界面</el-button>
+                <el-popover placement="right"  width="200" trigger="manual" v-model="visible">{{content}}
+                <el-button slot="reference" @click="notice_btn">今日公告</el-button>
+                </el-popover>
               </span>
             <el-divider></el-divider>
           </el-menu>
       </el-row>
   
-      <el-row :gutter="20" class="jianjie">
+      <!-- <el-row :gutter="20" class="jianjie">
         <el-col :span="18" :offset="2">
           <h1>这是简介</h1>
         </el-col>
-      </el-row> 
+      </el-row>  -->
       <el-row :gutter="20" class="show">
         <br>
         <br>
-        <router-view></router-view>
+        <router-view name="first"></router-view>
       </el-row>
       <!-- <el-row :gutter="20" class="home_main">
         <el-col :span="6" :offset="4">
@@ -68,12 +78,41 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'App',
-  methods:{
-    guan(){
-      console.log(1111);
+  data(){
+    return{
+      cang:false,
+      visible:false,
+      content:'',
     }
+  },
+  methods:{
+    userClick(){
+      this.$router.push('/admin');
+    },
+    guanClick(){
+      this.$router.push('/hout_admin')
+    },
+    notice_btn(){
+      this.visible=!this.visible,
+      axios.get('/notice/queryNotice')
+      .then((g)=>{
+        this.content=g.data
+      })
+    }
+    // open2() {
+    //   this.$notify({
+    //     title: '提示',
+    //     message: '这是一条不会自动关闭的消息',
+    //     duration: 0
+    //    });
+    // }
+  },
+  created:
+  function(){
+    // this.visible=true
   }
 }
 </script>
@@ -120,5 +159,10 @@ export default {
   padding: 0px;
   position:absolute;
   left: 230px;
+}
+.notice{
+  position:absolute;
+  top:0px;
+  
 }
 </style>

@@ -27,6 +27,7 @@ export default {
   name:"User_login",
   data(){
     return{
+      userValid:false,
       formInline:{
         user:'',
         password:'',
@@ -45,9 +46,13 @@ export default {
   methods:{
     signbtn(){
       // 验证表单
+      // var userValid=false
       this.$refs.userLogin.validate((valid)=>{
-        if(!valid)return;
-
+        if(!valid){
+          this.userValid=false
+          return;}
+        else{
+          this.userValid=true
         axios({
           method:'post',
           url:'/user/userLogin',
@@ -66,13 +71,31 @@ export default {
           }
           // 保存token值
           window.localStorage.setItem('userToken',g.data.token)
+
+          let userr=JSON.stringify(g.config.params.username)
+          window.sessionStorage.setItem('userName',userr)
           // this.$router.push('/hout_admin')
+
+          // this.$router.push({
+          //   path:'/user_login',
+          //   query:{
+          //     username:this.formInline.user,
+          //   }
+          // })
           })
         .catch((g)=>{console.log(g)})
           this.formInline.user="",
           this.formInline.password=""
-        
+        }
+        //  this.$router.push({
+        //     name:Bored,
+        //     query:{
+        //       username:this.formInline.user,
+        //       userValid:this.userValid
+        //     }
+        //   })
       })
+      
     }
   }
 }
