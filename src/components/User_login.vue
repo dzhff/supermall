@@ -70,11 +70,22 @@ export default {
             this.$message.success('登陆成功')
           }
           // 保存token值
-          window.localStorage.setItem('userToken',g.data.token)
+          window.sessionStorage.setItem('userToken',g.data.token)
 
           let userr=JSON.stringify(g.config.params.username)
           window.sessionStorage.setItem('userName',userr)
-          // this.$router.push('/hout_admin')
+
+          window.sessionStorage.setItem('userID',g.data.userID)
+
+          // this.$router.push({
+          //   path:'/show',
+          //   query:{
+          //     loginName:g.config.params.username
+          //   }
+          // })
+
+
+          this.$router.push('/source')
 
           // this.$router.push({
           //   path:'/user_login',

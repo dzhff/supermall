@@ -15,6 +15,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 // 根路径
 axios.defaults.baseURL="http://121.4.187.232:8080"
+axios.defaults.timeout = 8000
 
 // 配置Vue原型（在任何组件中都可以用）
 // Vue.prototype.$axios = axios
@@ -37,4 +38,30 @@ new Vue({
 })
 
 
+            //  axios.interceptors.request.use(function (config) {
+            //     // Do something before request is sent
+            //     let token = window.sessionStorage.getItem("userToken")
+            //     if (token) {
+            //         config.headers.userToken = token;    //将token放到请求头发送给服务器
+            //         return config;
+            //         //这里经常搭配token使用，将token值配置到tokenkey中，将tokenkey放在请求头中
+            //         // config.headers['accessToken'] = Token;
+            //     }
+            // }, function (error) {
+            //     // Do something with request error
+            //     return Promise.reject(error);
+            // });
 
+            
+// axios.interceptors.request.use(
+//   config => {
+//   // 判断是否存在token，如果存在的话，则每个http header都加上token
+//     let token = sessionStorage.getItem('userToken')
+//     if (!config.headers.hasOwnProperty('userToken') && token) {
+//       config.headers.userToken = token;
+//     }
+//     return config;
+//   },
+//   error => {
+//     return Promise.reject(error);
+//   });

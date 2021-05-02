@@ -13,10 +13,11 @@
         <el-aside width="200px">
             <el-menu default-active="2"
                 class="el-menu-vertical-demo">
+                <router-link to="/hout_admin/admin_bored">
                 <el-submenu index="1">
                     <template slot="title">
                     <i class="el-icon-location"></i>
-                    <span>公告管理页</span>
+                    <span>大厅留言板管理页</span>
                     </template>
                     <el-menu-item-group>
                         <template slot="title">分组一</template>
@@ -24,17 +25,24 @@
                         <el-menu-item index="1-2">选项2</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
+                </router-link>
+                <router-link to="/hout_admin/admin_gong">
                 <el-menu-item index="2">
                     <i class="el-icon-menu"></i>
-                    <span slot="title">大厅留言板管理页</span>
+                     <span>公告管理页</span>
                 </el-menu-item>
+                </router-link>
+                <router-link to="/hout_admin/admin_passage">
                 <el-menu-item index="3">
                     <i class="el-icon-menu"></i>
-                    <span slot="title">文章管理页</span>
+                    <span >文章管理页</span>
                 </el-menu-item>
+                </router-link>
             </el-menu>
         </el-aside>
-        <el-main>Main</el-main>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
       </el-container>
     </el-container>
 </template>
@@ -46,7 +54,10 @@ export default {
         loginout(){
             window.localStorage.removeItem('admintorToken')
             this.$router.push('/shouye')
-        }
+        },
+        // gongAdmin(){
+        //   this.$router.push('/admin_gong')
+        // }
     }
 }
 </script>

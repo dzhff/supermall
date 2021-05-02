@@ -14,7 +14,7 @@
     <el-col :span="15" :offset="4">
       <br>
       <el-table :data="tableWord" height="250" border style="width: 100%">
-        <el-table-column  prop="name" label="留言者"  width="180"></el-table-column>
+        <!-- <el-table-column  prop="name" label="留言者"  width="180"></el-table-column> -->
         <el-table-column prop="time" label="时间" width="180"></el-table-column>
         <el-table-column prop="content" label="留言"></el-table-column>
       </el-table>
@@ -73,23 +73,23 @@ export default {
         })
         // localStorage.setItem("bored",JSON.stringify(this.tableWord))
       },
-      updated:
-        function(){
-          axios.get('/hallComment/queryAllHallComment')
-            .then((g)=>{
-              for(let i of g.data){
-                this.tableWord=g.data
+      // updated:
+      //   function(){
+      //     axios.get('/hallComment/queryAllHallComment')
+      //       .then((g)=>{
+      //         for(let i of g.data){
+      //           this.tableWord=g.data
                 // console.log(this.tableWord)
           //        let usernames=sessionStorage.getItem('userName')
           // if(usernames!==''){
           //     this.tableWord.name=usernames
           //   }
-              }
+              
               // console.log(g);
-            })
+            }
             
-        }
-}
+    
+
 
 </script>
 

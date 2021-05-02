@@ -15,52 +15,70 @@ const Admin =()=>import('../components/Admin')
 const User_login =()=>import('../components/User_login')
 const User_registration =()=>import('../components/User_registration')
 const Admintor  =()=>import('../components/Admintor')
-// const Home  =()=>import('../components/Home')
+const Home  =()=>import('../components/Home')
 const Bored  =()=>import('../components/Bored')
 const Shouye  =()=>import('../components/Shouye')
 const Source  =()=>import('../components/Source')
 const Show  =()=>import('../components/Show')
+const Admin_gong =()=>import('../components/Admin_gong')
+const Admin_bored =()=>import('../components/Admin_bored')
+const Admin_passage =()=>import('../components/Admin_passage')
+
+
 
 Vue.use(Router)
 
 const routes = [
   {
     path:'',
-    redirect:'shouye'
+    redirect:'home'
   },
   {
-    path:'/shouye',
+    path:'/home',
     components:{
-      default:Shouye,
-      first:Shouye
-    }
-  },
-  {
-    path:'/bored',
-    components:{
-      default:Bored,
-      first:Bored
+      default:Home,
+      // scend:Home
     },
-  },
-  {
-    path:'/source',
-    components:{
-      default:Source,
-      first:Source
-    }
-  },
-  {
-    path:'/show',
-    components:{
-      default:Show,
-      first:Show
-    }
+    children:[
+      {
+        path:'',
+        redirect:'shouye'
+      },
+      {
+        path:'shouye',
+        components:{
+          default:Shouye,
+          // first:Shouye
+        }
+      },
+      {
+        path:'bored',
+        components:{
+          default:Bored,
+          // first:Bored
+        },
+      },
+      {
+        path:'source',
+        components:{
+          default:Source,
+          // first:Source
+        }
+      },
+      {
+        path:'show',
+        components:{
+          default:Show,
+          // first:Show
+        }
+      },
+    ]
   },
   {
     path:'/admin',
     components:{
       default:Admin,
-      scend:Admin
+      // scend:Admin
     },
     children:[
       {
@@ -72,21 +90,21 @@ const routes = [
         path:'user_login',
         components:{
           default:User_login,
-          scend:User_login
+          // scend:User_login
         }
       },
       {
         path:'user_registration',
         components:{
           default:User_registration,
-          scend:User_registration
+          // scend:User_registration
         }
       },
       {
         path:'admintor',
         components:{
           default:Admintor,
-          scend:Admintor
+          // scend:Admintor
         }
       }
     ]
@@ -95,42 +113,35 @@ const routes = [
     path:'/hout_admin',
     components:{
       default:Hout_admin,
-      scend:Hout_admin
-    }
+      // scend:Hout_admin
+    },
+    children:[
+      {
+        path:'admin_bored',
+        components:{
+          default:Admin_bored,
+          // third:Admin_bored
+        }
+      },
+      {
+        path:'admin_gong',
+        components:{
+          default:Admin_gong,
+          // third:Admin_gong
+        }
+      },
+      {
+        path:'admin_passage',
+        components:{
+          default:Admin_passage,
+          // third:Admin_passage,
+        }
+      }
+    ]
   }
+  
 ]
-//   {
-//     path:'/admin',
-//     component: Admin,
-//     children:[
-//       {
-//         path:'',
-//         redirect:'user_login'
-//         // component:Default
-//       },
-//       { 
-//         path:'user_login',
-//         component:User_login
-//       },
-//       {
-//         path:'user_registration',
-//         component:User_registration
-//       },
-//       {
-//         path:'admintor',
-//         component:Admintor
-//       }
-//     ]
-//   },
-//   {
-//     path:'/hout_admin',
-//     component:Hout_admin
-//   },
-//   {
-//     path:'/main',
-//     component:Home
-//   }
-// ]
+
 const router = new Router({
   routes,
 })

@@ -41,7 +41,7 @@ export default {
         .then((g)=>{
           console.log(g);
           this.$router.push({
-          path:'/show',
+          path:'/home/show',
           query:{
             idd:g.data[0].id
             // titleshow:g.data[0].title,
@@ -81,7 +81,7 @@ export default {
     },
     created:
         function(){
-            axios.get('http://121.4.187.232:8080/passage/queryAllPassage?pageNo=1&pageSize=5')
+            axios.get('http://121.4.187.232:8080/passage/queryAllPassage?pageNo=2&pageSize=6')
                 // method:'get',
                 // url:'/passage/queryAllPassage',
             .then((g)=>{
@@ -109,6 +109,7 @@ export default {
     font-size: 30px;
 }
 .span_time{
+    margin:15px 0;
     font-size: 20px;
 }
 .box-card{
