@@ -114,5 +114,9 @@ export default {
 .img{
   width: 100%;
   height: inherit;
+
+}
+.img:hover{
+  cursor: pointer;
 }
 </style>
