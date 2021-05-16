@@ -14,7 +14,7 @@
     </div>
   </div> -->
   <!-- <div class="adminform"> -->
-
+<h2 class="adminh2">管理员登录</h2>
   <Card class="adminform">
     <img class="adminimg" src="../../src/assets/image/logo.png" >
    <Form :model="formInline" :rules="ruleInline" inline ref="houtAdmin">
@@ -79,7 +79,8 @@ export default {
               if(g.data.state !==true){
                 this.$message.error('登陆失败')
               }else{
-                this.$message.success('登录成功')
+                // this.$message.success('登录成功')
+                this.$message.success('你已进入管理员界面')
               }
               window.localStorage.setItem('admintorToken',g.data.token)
               this.$router.push('/hout_admin')
@@ -151,5 +152,10 @@ export default {
   text-align: center;
   width: 300px;
   /* height: 450px; */
+}
+.adminh2{
+  position: absolute;
+  top: 80px;
+  left: 540px;
 }
 </style>

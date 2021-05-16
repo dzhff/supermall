@@ -22,7 +22,12 @@ const Source  =()=>import('../components/Source')
 const Show  =()=>import('../components/Show')
 const Admin_gong =()=>import('../components/Admin_gong')
 const Admin_bored =()=>import('../components/Admin_bored')
-const Admin_passage =()=>import('../components/Admin_passage')
+const Mixing =()=>import('../components/Mixing')
+const Passage_mix =()=>import('../components/Passage_mix')
+const Passage_new =()=>import('../components/Passage_new')
+const All_user =()=>import('../components/All_user')
+const Hout_home =()=>import('../components/Hout_home')
+
 
 
 
@@ -117,6 +122,14 @@ const routes = [
     },
     children:[
       {
+        path:'',
+        redirect:'hout_home',
+      },
+      {
+        path:'hout_home',
+        component:Hout_home
+      },
+      {
         path:'admin_bored',
         components:{
           default:Admin_bored,
@@ -130,13 +143,35 @@ const routes = [
           // third:Admin_gong
         }
       },
-      {
-        path:'admin_passage',
-        components:{
-          default:Admin_passage,
+      // {
+        // path:'admin_passage',
+        // components:{
+          // default:Admin_passage,
           // third:Admin_passage,
-        }
-      }
+        // },
+        // children:[
+          {
+            path:'',
+            redirect:'all_user'
+          },
+          {
+            path:'all_user',
+            component:All_user,
+          },
+          {
+            path:'passage_mix',
+            component:Passage_mix,
+          },
+          {
+            path:'mixing',
+            component:Mixing
+          },
+          {
+            path:'passage_new',
+            component:Passage_new
+          }
+        // ]
+      // }
     ]
   }
   

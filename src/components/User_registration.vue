@@ -1,6 +1,7 @@
 <template>
   <div class="zheng2">
       <!-- <h2>这是用户注册界面</h2> -->
+       <h2 class="zhuu">新用户注册</h2>
       <el-card class="adminform2">
         <img class="adminimg" src="../../src/assets/image/logo.png" >
       <el-form :model="formInline" status-icon :rules="rules" label-width="100px" ref="userRegist" class="demo-ruleForm">
@@ -29,6 +30,25 @@ import axios from 'axios';
 export default {
     name:"User_registration",
     data(){
+       var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } else {
+          if (this.checkPass !== '') {
+            this.$refs.userRegist.validateField('checkPass');
+          }
+          callback();
+        }
+      };
+      var validatePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.pass) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      }
         return{
             formInline:{
                 user:'',
@@ -37,16 +57,22 @@ export default {
             },
             rules:{
                 user:[
-                    {required:true,message:'Please fill in the user name',trigger: 'blur'}
+                    {required:true,message:'请输入用户名',trigger: 'blur'}
                 ],
-                password:[
-                    {required:true,message:'Please fill in the password.', trigger: 'blur'},
-                    {type: 'string', min: 5, message: 'The password length cannot be less than 6 bits', trigger: 'blur'}
-                ],
-                checkPass:[
-                    {required:true,message:'Please fill in the password again',trigger:'blur'},
+                // password:[
+                //     {required:true,message:'Please fill in the password.', trigger: 'blur'},
+                //     {type: 'string', min: 5, message: 'The password length cannot be less than 6 bits', trigger: 'blur'}
+                // ],
+                // checkPass:[
+                //     {required:true,message:'Please fill in the password again',trigger:'blur'},
                     
-                ]
+                // ]
+                 password: [
+            { required:true,validator: validatePass, trigger: 'blur' }
+          ],
+          checkPass: [
+            { required:true,validator: validatePass2, trigger: 'blur' }
+          ],
             }
         }
     },
@@ -65,10 +91,14 @@ export default {
                      }
                  }).then((g)=>{
                      console.log(g)
-                     this.$message.success('注册成功')
+                     this.$message.success('注册成功,请再次登录')
                      this.formInline.user="",
                      this.formInline.password="",
                      this.formInline.checkPass=""
+                     this.$router.push({
+                       path:'/admin/user_login'
+                     })
+                    //  this.$message.success('')
                  }).catch((g)=>{console.log(g);})
 
                   }else{
@@ -85,6 +115,19 @@ export default {
 </script> 
 
 <style>
+/* .zhuu{
+  position: absolute;
+  left: 500px;
+  top: 80px;
+  
+} */
+.zhuu{
+  
+  position: absolute;
+  top: 50px;
+  left: 530px;
+
+}
 .zheng2{
   /* background-color:  rgba(111, 128, 175, 1.0); */
   background-color: whitesmoke;
@@ -120,9 +163,10 @@ export default {
   padding: 5px 5px 5px 20px
 }
 .el-form{
-    position: absolute;
-    left: 0;
-    /* height: 300px; */
+  /* opacity: 0; */
+     box-shadow: 0 2px 12px 0 white  !important;
+     text-align: center !important;
+     position: absolute  !important;
 }
 .zhubtn{
     position: absolute;

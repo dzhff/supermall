@@ -1,66 +1,60 @@
 <template>
   <div id="app">
-    <!-- <router-view name="scend"></router-view> -->
-    <!-- <router-view></router-view> -->
-    <!-- <router-link to='/admin' tag="button"> 登录</router-link>
-    <router-link to='/hout_admin' tag="button" @click="guan">管理员界面</router-link> -->
-    <!-- <router-link to='/main' tag="button">主页面</router-link> -->
     <el-container>
     <el-header class="home_head">
-      <!-- <span class="notice">
-          <el-button plain @click="notice_btn" v-show="gonggao">不会自动关闭</el-button>
-      </span> -->
       <el-row :gutter="20">
-        <el-col :span="18" :offset="4">
-        <div>
-            <!-- <img src="../../src/assets/image/logo.png"  width="100" height="80"> -->
-            <span>
-              <h1>学习资源分享</h1> 
-            </span>
+        <el-col :span="18" :offset="4" class="head">
+        <div >
+            <img src="../../src/assets/image/logo.png"  width="60" height="50">
+            <span style="color:black">学习资源分享</span> 
+        </div>
+        <div class="signbtn">
+          <a class="signbtnA" v-show="signshow" @click="userClick">登录</a>
+          <!-- <a class="signbtnA" v-show="!signshow" v-text="signUser" @click="userBack"></a> -->
+          <el-dropdown v-show="!signshow">
+            
+              <a class="el-dropdown-link signbtnA" v-text="signUser">
+                
+              </a>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item @click.native="userBack">退出登录</el-dropdown-item>
+                <el-dropdown-item @click.native="changeClick">切换账户</el-dropdown-item>
+                <!-- <el-dropdown-menu></el-dropdown-menu> -->
+                <!-- <el-dropdown-item @click.native="adminClick">管理员登录</el-dropdown-item> -->
+              </el-dropdown-menu>
+    
+          </el-dropdown>
         </div>
         </el-col>
       </el-row>
     </el-header>
 
       <el-row :gutter="20" class="all_btn">
-          <el-menu class="el-menu-demo" mode="vertical" >
+        <el-col :span="15" :offset="4" >
+          <el-menu class="el-menu-demo"  mode="horizontal" >
               <span class="meue_head">
-                <router-link to='/home/shouye'><el-menu-item >首页</el-menu-item></router-link>
-                <router-link to="/home/bored"><el-menu-item >大厅留言板</el-menu-item></router-link>
-                <router-link to='/home/source'><el-menu-item>资源文章页</el-menu-item></router-link>
+                <router-link to='/home/shouye'><el-menu-item class="size">首页</el-menu-item></router-link>
+                <router-link to="/home/bored"><el-menu-item class="size">大厅留言板</el-menu-item></router-link>
+                <router-link to='/home/source'><el-menu-item class="size">资源文章页</el-menu-item></router-link>
                 <router-link to='/home/show' v-show="cang"><el-menu-item>资源展示</el-menu-item></router-link>
                 <br>
                 <br>
-                <el-button @click="userClick">登录</el-button>
-                <el-button @click="guanClick" >管理员界面</el-button>
-                <!-- <el-button @click="gongAdmin" v-show="cang">公告管理页</el-button> -->
-                <el-popover placement="right"  width="200" trigger="manual" v-model="visible">{{content}}
-                <el-button slot="reference" @click="notice_btn">今日公告</el-button>
-                </el-popover>
               </span>
-            <el-divider></el-divider>
           </el-menu>
-      </el-row>
-      <!-- <el-row :gutter="20" class="jianjie">
-        <el-col :span="18" :offset="2">
-          <h1>这是简介</h1>
         </el-col>
-      </el-row>  -->
+      </el-row>
       <el-row :gutter="20" class="show">
+        <el-col :span="18" :offset="4">
         <br>
         <br>
-        <!-- <router-view name="first"></router-view> -->
-        <router-view></router-view>
-      </el-row>
-      <!-- <el-footer>
-        <el-row :gutter="20" class="home_main">
-        <el-col :span="15" :offset="4">
-          <el-card class="card" >
-            这是文章
-          </el-card>
+            <router-view></router-view>
         </el-col>
-      </el-row> 
-      </el-footer> -->
+      </el-row>
+      <el-row :gutter="20" class="show">
+        <el-col :span="24" :offset="0" class="footdiv">
+          <h3>欢迎来到学习的世界</h3>
+        </el-col>
+      </el-row>
   </el-container>
     
   </div>
@@ -72,14 +66,35 @@ export default {
   name: 'Home',
   data(){
     return{
+      signshow:true,
       cang:false,
       visible:false,
       content:'',
+      signUser:'',
     }
   },
   methods:{
+    userBack(){
+      window.sessionStorage.removeItem('userName')
+      window.sessionStorage.removeItem('userToken')
+      this.signshow=!this.signshow
+    },
     userClick(){
       this.$router.push('/admin');
+    },
+    changeClick(){
+      this.$confirm('此操作将退出现有用户, 是否继续?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+              }).then(()=>{
+                window.sessionStorage.removeItem('userName')
+                window.sessionStorage.removeItem('userToken')
+                this.$router.push('/admin')
+              })
+    },
+    adminClick(){
+      this.$router.push('/admin/admintor')
     },
     guanClick(){
       this.$router.push('/hout_admin')
@@ -91,25 +106,62 @@ export default {
         this.content=g.data
       })
     },
-    // gongAdmin(){
-    //       this.$router.push('/admin_gong')
-    //     }
-    // open2() {
-    //   this.$notify({
-    //     title: '提示',
-    //     message: '这是一条不会自动关闭的消息',
-    //     duration: 0
-    //    });
-    // }
   },
   created:
   function(){
-    // this.visible=true
+    let loginName=JSON.parse(window.sessionStorage.getItem('userName'))
+    if(loginName!==null){
+      this.signshow=!this.signshow
+      this.signUser="Hi！"+loginName
+    }
+  },
+  updated:
+  function(){
+  //   let signName=window.localStorage.getItem('userName')
+  //   if(signName!=''){
+  //     this.signshow=!this.signshow
+  //     this.signUser=signName
+  //   }
   }
 }
 </script>
 
 <style>
+.signbtnA{
+  color: black;
+}
+.signbtn{
+  font-size: 20px;
+  padding: 20px 0px 5px 0px;
+  font-weight:normal;
+}
+.head{
+  /* margin: 0px; */
+  font-size: 40px;
+  font-weight:bolder;
+  width: 1000px;
+   display: flex;
+  justify-content: space-between;
+}
+.homediv{
+     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+     border-radius: 4px;
+     font-size: 15px;
+     padding: 10px 15px;
+     width: 60vw;
+     padding: 10px 40px;
+}
+.footdiv{
+     /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
+     border-radius: 4px;
+     font-size: 20px;
+     padding: 40px 15px;
+     width: 100vw;
+     height: 100px;
+     text-align: center;
+     /* padding: 10px 40px; */
+     background-color: rgba(0, 0, 0, 0.308);
+}
 #app{
   height: 100%;
   margin: 0;
@@ -118,43 +170,42 @@ export default {
 }
 .meue_head{
     display: flex; 
-    justify-content:center;
+    justify-content:left;
+    /* width: 500px; */
+    /* position: absolute; */
+    /* margin: 20px 0px; */
     /* width: 600px; */
 
 }
+/* .el-header{
+  height: 100px;
+} */
 .home_head{
     /* height:100px ; */
-     background-color:  rgba(111, 128, 175, 1.0);
-    /* display: flex; */
-    /* justify-content: center; */
-    padding: 40px 0 80px 0;
-    font-size: 30px;
+     /* background-color: rgba(112, 132, 199, 0.774); */
+   background-color:  whitesmoke;
+ display: flex;
+  justify-content: space-between;
+  align-items:flex-start;
+    padding: 30px 0 60px 0;
+    font-size: 25px;
+    color: black;
+    /* height: 500px; */
     /* font-weight:bolder; */
-    margin:0px ;
+    margin:0px 0px;
 }
-.jianjie{
-  display: flex;
-  justify-content: center;
-  padding: 40px 0 40px 0;
 
-}
 .el-header img{
     vertical-align: middle;
 }
-.el-divider{
-  display:inline-block;
-  /* margin: 0px; */
-  /* height:100%; */
-  width:60%;
-  margin:0 8px;
-  vertical-align:middle;
-  padding: 0px;
-  position:absolute;
-  left: 230px;
-}
+
 .notice{
   position:absolute;
   top:0px;
+  
+}
+.el-dropdown-link{
+  font-size: 20px;
   
 }
 </style>

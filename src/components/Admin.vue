@@ -1,6 +1,6 @@
 <template>
   <div class="zheng">
-    <el-menu  class="el-menu-demo" mode="horizontal" >
+    <el-menu  class="el-menu-demo admindiv" mode="horizontal" >
       <router-link to="/admin/user_login" tag="el-menu-item" index="1">登录</router-link>
       <router-link to="/admin/user_registration" tag="el-menu-item" index="2">注册</router-link>
       <router-link to="/admin/admintor" tag="el-menu-item" index="3">管理员登录</router-link>
@@ -19,7 +19,7 @@ export default {
 .zheng{
   /* background-color:  rgba(111, 128, 175, 1.0); */
   background-color: whitesmoke;
-  position: relative;
+  position: relatidevve;
   padding: 0;
   margin: 0;
   width: 100vw;
@@ -40,5 +40,9 @@ export default {
   text-align: center;
   width: 300px;
   /* height: 450px; */
+}
+.admindiv{
+  display: flex;
+  justify-content:center;
 }
 </style>
