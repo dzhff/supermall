@@ -64,9 +64,6 @@ export default {
             window.localStorage.removeItem('admintorToken')
             this.$router.push('/admin')
         },
-        // gongAdmin(){
-        //   this.$router.push('/admin_gong')
-        // }
     }
 }
 </script>

@@ -1,19 +1,5 @@
 <template>
   <div class="zheng">
-    <!-- <div class="out_lable">
-        <div class="username">
-          <h3>账户名</h3> 
-          <input type="text" placeholder="username"/>
-        </div>
-        <div class="password">
-          <h3>密码</h3>
-          <input type="text" placeholder="password"/>
-        </div>
-      <div class="admintor_btn">
-        <button type="primary">登录</button>
-    </div>
-  </div> -->
-  <!-- <div class="adminform"> -->
 <h2 class="adminh2">管理员登录</h2>
   <Card class="adminform">
     <img class="adminimg" src="../../src/assets/image/logo.png" >
@@ -88,18 +74,7 @@ export default {
             })
           })
           
-            // axios({
-            //   method:'post',
-            //   url:'/user/adminLogin?password='+this.formInline.password+'&username='+this.formInline.user,
-            //   // headers: "content-type: 'application/json'"
-            // })
-
-           
-            // axios.post('/user/adminLogin',this.formInline
-            // )
              .then((g)=>{
-              // 这里要写一个验证
-              // if(g.data.state = true)
               console.log(g)
             }).catch((g)=>{
               console.log(g);
@@ -108,17 +83,7 @@ export default {
             this.formInline.user=""
             this.formInline.password=""
 
-            // beforeRouteEnter(to, from, next){
-            //   if(to.formInline.user=='admin'&&to.formInline.password=='admin'){
-            //     console.log(to.formInline.user)
-            //     console.log(to.formInline.password)
-            //   }
-            // }
-            // 全局定义的
-            // this.$axios.get("")'
-            // if(this.formInline.user != 'admin' || this.formInline.password != 'admin'){
-
-            // }
+           
           
           
         }

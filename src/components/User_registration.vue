@@ -41,12 +41,18 @@ export default {
         }
       };
       var validatePass2 = (rule, value, callback) => {
+        // console.log(this.value);
+        console.log(this.checkPass);
+        console.log(value);
         if (value === '') {
           callback(new Error('请再次输入密码'));
-        } else if (value !== this.pass) {
+          console.log(value);
+        } else if (value !== this.formInline.checkPass) {
+          // console.log();
           callback(new Error('两次输入密码不一致!'));
         } else {
           callback();
+
         }
       }
         return{
@@ -59,22 +65,17 @@ export default {
                 user:[
                     {required:true,message:'请输入用户名',trigger: 'blur'}
                 ],
-                // password:[
-                //     {required:true,message:'Please fill in the password.', trigger: 'blur'},
-                //     {type: 'string', min: 5, message: 'The password length cannot be less than 6 bits', trigger: 'blur'}
-                // ],
-                // checkPass:[
-                //     {required:true,message:'Please fill in the password again',trigger:'blur'},
-                    
-                // ]
+              
                  password: [
-            { required:true,validator: validatePass, trigger: 'blur' }
-          ],
-          checkPass: [
-            { required:true,validator: validatePass2, trigger: 'blur' }
-          ],
-            }
-        }
+                    { required:true,validator: validatePass, trigger: 'blur' },
+                    {type: 'string', min: 5, message: 'The password length cannot be less than 6 bits', trigger: 'blur'}
+
+                 ],
+                checkPass: [
+                  { required:true,validator: validatePass2, trigger: 'blur' }
+                ],
+                  }
+              }
     },
     methods:{
         zhubtn(){
@@ -115,12 +116,6 @@ export default {
 </script> 
 
 <style>
-/* .zhuu{
-  position: absolute;
-  left: 500px;
-  top: 80px;
-  
-} */
 .zhuu{
   
   position: absolute;
@@ -140,13 +135,7 @@ export default {
 .adminimg{
   width: 80px;
 }
-/* .el-card{
-  height: 300px;
-  padding: 0px 100px;
-} */
 .adminform2{
-  /* display: flex; */
-  /* justify-content: left; */
   position: absolute;
   top:10%;
   left:50%;

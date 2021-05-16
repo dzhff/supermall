@@ -117,11 +117,6 @@ export default {
   },
   updated:
   function(){
-  //   let signName=window.localStorage.getItem('userName')
-  //   if(signName!=''){
-  //     this.signshow=!this.signshow
-  //     this.signUser=signName
-  //   }
   }
 }
 </script>
@@ -171,19 +166,9 @@ export default {
 .meue_head{
     display: flex; 
     justify-content:left;
-    /* width: 500px; */
-    /* position: absolute; */
-    /* margin: 20px 0px; */
-    /* width: 600px; */
-
 }
-/* .el-header{
-  height: 100px;
-} */
 .home_head{
-    /* height:100px ; */
-     /* background-color: rgba(112, 132, 199, 0.774); */
-   background-color:  whitesmoke;
+   background-color:  rgba(111, 128, 175, 0.8);
  display: flex;
   justify-content: space-between;
   align-items:flex-start;

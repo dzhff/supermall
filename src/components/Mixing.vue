@@ -28,23 +28,6 @@
         </el-form-item>
         <br>
         <el-form-item label="资源">
-            <!-- <el-upload
-                class="upload-demo"
-                ref="upload"
-                action=''
-                :on-remove="handleRemove"
-                :file-list="filelist"
-                :auto-upload="false"
-                :on-exceed="exceedFile"
-                :on-change="fileChange"
-                :before-upload="beforeUploadFile"
-                :on-success="handleSuccess"
-	            :on-error="handleError">
-                <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-                <!-- <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button> -->
-                <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/excel文件，且不超过500kb</div>
-            </el-upload> --> 
-
             <el-upload
               class="upload-demo"
               action="https://jsonplaceholder.typicode.com/posts/"
@@ -155,8 +138,6 @@ export default {
                     }).then(res=>{
                         console.log('success')
                         console.log(res)
-
-//////////////////////////////////////////////////////////////////////////                      //////////////////////////////////////////////////////
                       for(let i in this.undonefiles){
                         if(this.undonefiles[i]){
                           this.upsofiles.push(this.undonefiles)
@@ -184,37 +165,13 @@ export default {
                     })
 
 
-///////////////////////////////////////////////////////////////
 
                         
                     }).catch(err=>{
                         console.log('failed')
                     })
                     
-                    // console.log(param.getAll('file'));
-
-                   
-                    // let form = new FormData()
-                    // form.append('passageID',this.passageID)
-                    // // console.log(this.fileList)
-                    // for(let i in this.filelist){
-                    //     form.append('file', this.filelist[i]);
-                    // }
-                    // console.log(this.filelist);
-                    // console.log(form.getAll("file"));
-                    // // form.append('file', this.filelist[i]);//有多少条数据appeng的多少次
-                    // axios.post("/admin/uploadResources", form, {headers: {'Content-type': 'multipart/form-data',token:this.token}}).then(res => {
-                    //     console.log(res)
-                    //     this.$message({
-                    //         type: "success",
-                    //         message: "导入成功"
-                    //     });
-                    //     this.filelist= []
-                    // }).catch(err => {
-                    //     console.log(err)
-                    // })
                     
-                
         })
         }else{
           if(this.mixTitle==''){
@@ -474,15 +431,8 @@ export default {
               
               )
             this.upfiles=this.localfiles[0]
-            // console.log(this.upfiles);
-            // console.log(this.upfiles[0].imgID);
-            // console.log(this.localfiles[0]);
           })  
         }
-        // for(let i in this.fileList){
-        //      this.localfiles.push(this.fileList[i])
-        //   }
-        
         })
     },
     

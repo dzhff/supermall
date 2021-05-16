@@ -1,15 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// import Hout_admin from '../components/Hout_admin'
-// // 登录注册界面
-// // 总
-// import Admin from '../components/Admin'
-// // 分
-// import User_login from '../components/User_login'
-// import User_registration from '../components/User_registration'
-// import Admintor from '../components/Admintor'
-
 const Hout_admin =()=>import('../components/Hout_admin')
 const Admin =()=>import('../components/Admin')
 const User_login =()=>import('../components/User_login')
@@ -181,21 +172,25 @@ const router = new Router({
   routes,
 })
 
-// router.beforeEach((to,from,next)=>{
-//   if(to.path == '/admintor'){
-//     next()
-//     // console.log(1111)
-//   }
-//   else{
-    // const token = window.localStorage.getItem('admintorToken');
-    // if(!token&&to.path!=='/admintor'){
-    //   return next('/admintor')
-    // }else{
-//       next('/admintor')
-//     // }
-//   }
+
+// 全局路由拦截-进入页面前执行
+router.beforeEach((to, from, next) => {
+ let kk= window.localStorage.getItem('admintorToken')
+console.log(to);
+console.log(to.matched[1].path);
+console.log((to.matched[1].path=='/hout_admin/hout_home') || (to.matched[1].path=='/hout_admin/admin_bored') || (to.matched[1].path=='/hout_admin/admin_gong')||(to.matched[1].path=='/hout_admin/all_user')||(to.matched[1].path=='/hout_admin/passage_mix')||(to.matched[1].path=='/hout_admin/passage_new'));
+  if(to.matched[1].path!='/hout_admin'){
+    next()
+  } 
+    if((to.matched[1].path=='/hout_admin/hout_home') || (to.matched[1].path=='/hout_admin/admin_bored') || (to.matched[1].path=='/hout_admin/admin_gong')||(to.matched[1].path=='/hout_admin/all_user')||(to.matched[1].path=='/hout_admin/passage_mix')||(to.matched[1].path=='/hout_admin/passage_new')){
+      if(kk){
+        next()
+      }else{
+        next('/admin/admintor')
+      }
+    }
   
-// })
+});
 
 export default router
 
